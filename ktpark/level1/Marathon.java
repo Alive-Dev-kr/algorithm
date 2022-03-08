@@ -47,6 +47,8 @@ public class Marathon {
 
 		}
 
+		System.out.println("size :: " + hashMap.size());
+
 		Iterator<Map.Entry<String, Integer>> iter = hashMap.entrySet().iterator();
 
 		while (iter.hasNext()) {
