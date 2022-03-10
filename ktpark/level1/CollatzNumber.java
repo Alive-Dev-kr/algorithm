@@ -10,23 +10,42 @@ public class CollatzNumber {
 			1-2. 입력된 수가 홀수라면 3을 곱하고 1을 더합니다.
 			2. 결과로 나온 수에 같은 작업을 1이 될 때까지 반복합니다.
 		 */
-		System.err.println("결과 2 : " + solution(626331));
+		//System.err.println("결과 : " + solution(626331));
+		System.err.println("결과 : " + solution(16));
 
 	}
 
     public static int solution(int num) {
-    	Integer callCnt = 0;
-    	getCallCntCollatz(num, callCnt);
+
+    	int callCnt = 0;
+
+    	while (num != 1) {
+
+    		if (callCnt >= 500) {
+    			callCnt = -1;
+    			break;
+    		}
+
+    		if (num % 2 == 1) {
+        		// 홀수
+        		num = num * 3 + 1;
+        	} else {
+        		// 짝수
+        		num = num / 2;
+        	}
+
+    		callCnt++;
+
+    	}
+
     	return callCnt;
     }
 
-    public static Integer getCallCntCollatz(int num, Integer callCnt) {
-    	collatz(num, callCnt);
-    	return callCnt;
-    }
+    public static long collatz2(long num) {
 
-    public static long collatz(long num, Integer calCnt) {
-
+    	/*
+    	 * 간단하게 반복문 하나로 해결할 수 있던거를 재귀로 쓰려다가 뻘짓..
+    	 * (작동은 한다..)
     	if (num % 2 == 1) {
     		// 홀수
     		num = num * 3 + 1;
@@ -44,6 +63,9 @@ public class CollatzNumber {
     	} else {
     		return collatz(num, calCnt);
     	}
+    	 */
+
+    	return 1;
 
     }
 
