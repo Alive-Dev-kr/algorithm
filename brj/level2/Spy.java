@@ -21,18 +21,23 @@ class Spy {
         * 2. 듬성 듬성 중간 건너뛰고 나서의 조합 (예 : a,b,d & a,c,d
         * 3. 줄여가기 (예 : a,b,c,d & a,b,c & a,b
      *
+     * !!! 26~30번 실패 후 32~36번줄로 수정 / 36~38번줄 공식이 더 간단함(Nill씨가 찾아낸 공식)!!!
      * spy의 복장이 다를 수 있는 경우의 수 계산 법은 아래와 같다.
-         * aXb = answer + answerXc = answer + answerXd
+         * aXb = answer + answerXc = answer + answerXd (=>이 공식은 a,b,c,d 순차적으로 모든 걸 입었을 경우의 수만 찾아내줌.)
          *     => 3X2 = 6 + 6X4 = 30 + 30X3 = 120
          * 잘 보면 첫 a,b를 곱하고 난 후 수식은 계속 동일하다. answer = answer + answer X 다음 장비 개수
-     * 마지막으로 최종 결과값인 120에 각 장비별로 개수를 더해주는 것이다.
-     *      * 120 + 3(a) + 2(b) + 4(c) + 3(d) = 132
+         * 마지막으로 최종 결과값인 120에 각 장비별로 개수를 더해주는 것이다.
+         *     => 120 + 3(a) + 2(b) + 4(c) + 3(d) = 132
          *
          * answer + answerXa = answer + answerXb = answer + answerXc = answer + answerXd
          *     => 1 + 1X3 = 4 + 4X2 = 12 + 12X4 = 60 + 60X3 = 240
          * 잘 보면 수식은 계속 동일하다. answer = answer + answer X 다음 장비 개수
      *
-     * answer-1???????????????
+         * (a+1) X (b+1) X (c+1) X (d+1) -1(모두 안 입는 경우)
+         *     => (3+1) X (2+1) X (4+1) X (3+1) = 240
+         * 각 장비별 +1은 안 입을 경우를 포함해준 것.
+     *
+     * answer-1 = -1은 모두 안 입는 경우를 빼준 경우.
      *
      */
     public static int solution(String[][] clothes) {
