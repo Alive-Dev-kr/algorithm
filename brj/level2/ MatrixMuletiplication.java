@@ -1,6 +1,6 @@
 package level2;
 
-public class MatrixMuletiplication {
+class MatrixMuletiplication {
 
     public static int[][] solution(int[][] arr1, int[][] arr2) {
         // hint 행렬의 곱셈은 arr1의 열과 arr2의 행이 같을 때만 성립됨. = arr1의 열과 arr2의 행 length가 같음.
