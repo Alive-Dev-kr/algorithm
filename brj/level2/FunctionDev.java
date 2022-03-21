@@ -12,7 +12,7 @@ public class FunctionDev {
      *
      * 1. 남은 완료 일자 = ( 100(100%완성율) - 진행율(progresses) ) / 진행 속도(speed)
      * 2. 남은 완료 일자를 담는 list 생성
-     * 3. 이전 작업과 현재 작업의 남은 완료 일짜를 비교한다.
+     * 3. 남은 완료 일짜가 가장 큰 이전 작업과 현재 작업의 남은 완료 일짜를 비교한다.
      */
 
     public static int[] solution(int[] progresses, int[] speeds) {
@@ -28,9 +28,6 @@ public class FunctionDev {
         int prev = queue.poll(); // 처음 것을 prev에 대입 후 dequeue(삭제)시킴.
         list.add(1);
 
-        //7 3 5 9 1 2 4
-        //2 1 2 1 1
-        //3 4 - 이 걸로 되고 있음.
         for(Integer a : queue) { // 처음 것을 삭제 했기 때문에 두 번째 것부터 반복
             if(prev >= a) {
                 list.set(idx, list.get(idx) + 1);
