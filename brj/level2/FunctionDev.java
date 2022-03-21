@@ -20,8 +20,7 @@ public class FunctionDev {
         Queue<Integer> queue = new LinkedList<>();
 
         for(int i=0; i<progresses.length; i++) {
-            queue.offer( (int)Math.ceil((100 - progresses[i]) / speeds[i]) );
-            // 7 3 5
+            queue.offer( (int)Math.ceil((double) (100 - progresses[i]) / speeds[i]) );
         }
         System.out.println("queue : " + queue);
 
