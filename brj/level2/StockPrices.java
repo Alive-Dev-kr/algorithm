@@ -14,7 +14,7 @@ public class StockPrices {
      * 5초 시점의 ₩3은 0초간 가격이 떨어지지 않았습니다.
      */
 
-    public static int[] solution(int[] prices) {
+    public static Integer[] solution(int[] prices) {
         List<Integer> list = new ArrayList<>();
 
         // prices를 queue에 담기
@@ -24,34 +24,22 @@ public class StockPrices {
         }
 
         Integer curr = queue.poll(); // 첫번째 price
-        int sec = 0; // 유지되는 시간(초)
         int next = 0;
+        int sec = 0; // 유지되는 시간(초)
         while(queue.size() != 0) {
-            System.out.println("curr : " + curr);
             sec = 0;
             Integer[] q = queue.toArray(new Integer[0]);
-            for(int i=0; i<queue.size(); i++) {
+            for(int i=0; i<queue.size(); i++) { // curr 다음 것부터 반복
                 next = q[i];
-                System.out.println("next : " + next);
                 sec++;
-                if(curr > next) {
-                    System.out.println("========= break =========");
-                    break;
-                }
+                if(curr > next) break;
             }
-            System.out.println("sec ======= " + sec);
             list.add(sec);
             curr = queue.poll(); // 현재 price를 dequeue한 후 다음 price대입.
-            System.out.println("-------------------------------");
         }
         list.add(0); // 마지막은 무조건 0초
 
-        int[] answer = new int[list.size()];
-        for(int i=0; i<list.size(); i++) {
-            answer[i] = list.get(i);
-            System.out.println("answer : " + answer[i]);
-        }
-
+        Integer[] answer = list.toArray(new Integer[0]);
         return answer;
     }
 
