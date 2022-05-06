@@ -21,26 +21,39 @@ public class truckPassedBridge {
      */
 
     public static int solution(int bridge_length, int weight, int[] truck_weights) {
-        int answer = 1;
+        int answer = 0;
 
         int curTotal = 0; // 현재 다리 위 총 트럭 무게
         Queue<Integer> queue = new LinkedList<>();
 
         int poll = 0;
         for(int truck_weight : truck_weights) {
-            curTotal += truck_weight;
+            curTotal += truck_weight; // 7
 
+            //1: 7 > 10
             while (curTotal > weight) {
-                poll = queue.poll();
-                curTotal -= poll;
-                answer += 1;
+                //2: 11(7+4) > 10
+                if(bridge_length >= queue.size()) answer += (bridge_length+1)-queue.size();
+                else answer += 1;
+                poll = queue.poll(); //2: 7
+                curTotal -= poll;//2: 4(11-7)
+                //answer += 1;//2: 2
+                //answer += 1;
+                //System.out.println("bridge_length : " + bridge_length + " | queue.size() : " + queue.size());
+                //2: 1-1;
+                System.out.println("answer : " + answer + " | poll : " + poll + " | queue : " + queue);
             }
 
-            if(queue.size() <= bridge_length) {
+            if(queue.size() < bridge_length) {
+                //1: 1 <= 2
+                //2: 2 <= 2
                 queue.offer(truck_weight);
                 answer += 1;
-            }
+                //1: 1
+                //2: 3
 
+                System.out.println("answer : " + answer + " | poll : " + poll + " | queue : " + queue);
+            }
         }
 
         System.out.println("answer : " + answer);
@@ -49,13 +62,13 @@ public class truckPassedBridge {
     }
 
     public static void main(String args[]) {
-        /*int bridge_length = 2;
+        int bridge_length = 2;
         int weight = 10;
-        int[] truck_weights = {7,4,5,6};*/
+        int[] truck_weights = {7,4,5,6};
 
-        int bridge_length = 100;
+        /*int bridge_length = 100;
         int weight = 100;
-        int[] truck_weights = {10};
+        int[] truck_weights = {10};*/
 
         solution(bridge_length, weight, truck_weights);
 
