@@ -12,12 +12,15 @@ public class KakaoOpenChat {
         List<String> recodList = Arrays.asList(record);
         Collections.reverse(recodList);
 
-        // userId , result list index
-        Map<String, Integer> map = new HashMap<>();
-
         String[] recodSplt = null;
         String rsltStr = null;
         String split1, split2, nickName  = null; // Sort, userId
+        /**
+         * 마지막이 Leave일 경우 nickName이 null이기 때문에 이를 처리하기 위한 map
+         * key = userId
+         * value = result list index
+         */
+        Map<String, Integer> nullMap = new HashMap<>();
         for(String str : recodList) {
             recodSplt = str.split(" ");
 
@@ -39,13 +42,13 @@ public class KakaoOpenChat {
                     rsltStr += "나갔습니다.";
                     result.add(rsltStr);
                     if(nickName == null) {
-                        map.put(split2, result.size()-1);
+                        nullMap.put(split2, result.size()-1);
                     }
                     break;
             }
-            if(map.get(split2) != null && userMap.get(split2) != null) {
-                String replaceNull = result.get(map.get(split2)).replaceAll("null", userMap.get(split2));
-                result.set(map.get(split2), replaceNull);
+            if(nullMap.get(split2) != null && userMap.get(split2) != null) {
+                String replaceNull = result.get(nullMap.get(split2)).replaceAll("null", userMap.get(split2));
+                result.set(nullMap.get(split2), replaceNull);
             }
         }
 
