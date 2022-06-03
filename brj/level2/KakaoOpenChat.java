@@ -47,10 +47,10 @@ public class KakaoOpenChat {
                     }
                     break;
             }
-            if(nullMap.get(split2) != null && nullMap.get(split2) != -1 && userMap.get(split2) != null) {
+            if(nullMap.get(split2) != null && userMap.get(split2) != null) {
                 replaceNull = result.get(nullMap.get(split2)).replaceAll("null", userMap.get(split2));
                 result.set(nullMap.get(split2), replaceNull);
-                nullMap.put(split2, -1);// 해당 if문을 다시 들어오지 않게 하기 위함.
+                nullMap.remove(split2);// 해당 if문을 다시 들어오지 않게 하기 위함.
             }
         }
 
