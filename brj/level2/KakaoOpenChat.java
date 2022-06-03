@@ -8,19 +8,20 @@ public class KakaoOpenChat {
     public static String[] solution(String[] record) {
         List<String> result = new ArrayList<>();
 
-        Map<String, String> userMap = new HashMap<>();
         List<String> recodList = Arrays.asList(record);
         Collections.reverse(recodList);
 
+        Map<String, String> userMap = new HashMap<>();
         String[] recodSplt = null;
         String rsltStr = null;
-        String split1, split2, nickName  = null; // Sort, userId
+        String split1, split2, nickName  = null; // commant, userId, nickname
         /**
          * 마지막이 Leave일 경우 nickName이 null이기 때문에 이를 처리하기 위한 map
          * key = userId
          * value = result list index
          */
         Map<String, Integer> nullMap = new HashMap<>();
+        String replaceNull = null;
         for(String str : recodList) {
             recodSplt = str.split(" ");
 
@@ -46,9 +47,10 @@ public class KakaoOpenChat {
                     }
                     break;
             }
-            if(nullMap.get(split2) != null && userMap.get(split2) != null) {
-                String replaceNull = result.get(nullMap.get(split2)).replaceAll("null", userMap.get(split2));
+            if(nullMap.get(split2) != null && nullMap.get(split2) != -1 && userMap.get(split2) != null) {
+                replaceNull = result.get(nullMap.get(split2)).replaceAll("null", userMap.get(split2));
                 result.set(nullMap.get(split2), replaceNull);
+                nullMap.put(split2, -1);// 해당 if문을 다시 들어오지 않게 하기 위함.
             }
         }
 
