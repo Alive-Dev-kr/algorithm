@@ -27,10 +27,6 @@ public class Printer {
             }// location이 아닐 때
         }
 
-        /*if(check) {
-            answer = answer+tmpAnswer;
-        }*/
-
         System.out.println(answer);
 
         return answer;
