@@ -1,24 +1,60 @@
 package level2;
 
+import common.Common;
+
+import java.util.HashSet;
+
 //https://programmers.co.kr/learn/courses/30/lessons/42839
 public class FindMinority {
 
-    /**
-     * 접근 방법
-     * 1. numbers String을 쪼갠서 만들 수 있는 수들을 다 만들어 놓는다.
-     * 2. 만든 숫자 중 가장 작은 수부터 큰수까지 for문을 돌린다.
-     * 3. 그 중 소수만 골라낸다.
-     * 3-1. 2, 3, 5, 7 나누어지는 것 배제
-     *
-     */
     private static int solution(String numbers) {
-        int answer = 0;
+        HashSet<Integer> set = new HashSet<>();
+        permutation("", numbers, set);
+        int count = 0;
+        while(set.iterator().hasNext()){
+            int a = set.iterator().next();
+            System.out.println("a : " + a);
+            set.remove(a);
+            if(a==2) count++;
+            if(a%2!=0 && isPrime(a)){
+                count++;
+            }
+        }
 
-        return answer;
+        System.out.println("count : " +count);
+        return count;
+    }
+
+    public static boolean isPrime(int n){
+        if(n==0 || n==1) return false;
+        for(int i=3; i<=(int)Math.sqrt(n); i+=2){
+            if(n%i==0) return false;
+        }
+        return true;
+    }
+
+    public static void permutation(String prefix, String str, HashSet<Integer> set) {
+        int n = str.length();
+        Common.println("n", n);
+        //if (n == 0) System.out.println(prefix);
+        if(!prefix.equals("")) set.add(Integer.valueOf(prefix));
+        for (int i = 0; i < n; i++) {
+            Object[][] obj = { {"prefix", prefix}, {'i', i}, {"str.charAt(i)", str.charAt(i)} };
+            Common.println(obj);
+
+            Object[][] obj2 = { {"str.substring(0, i)", str.substring(0, i)}, {"substring(i + 1, n)", str.substring(i + 1, n)} };
+            Common.println(obj2);
+            Common.println();
+            permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i + 1, n), set);
+        }
+        Common.printlnDash();
     }
 
     public static void main(String args[]) {
-        String numbers = "17";
+        //String numbers = "17";
+        String numbers = "011";
         solution(numbers);
+
+        Common.println("numbers", numbers);
     }
 }
