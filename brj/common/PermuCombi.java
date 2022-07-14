@@ -6,25 +6,16 @@ import java.util.List;
 
 public class PermuCombi {
 
-    public static void permutation(int count, Integer[] numbers, String str) {
-        List<Integer> list = new ArrayList<>(Arrays.asList(numbers));
-        List<String> result = new ArrayList<>();
-
-        String tmpStr = "";
-        for(int i=0; i<list.size(); i++) {
-            tmpStr = str;
-            str += list.get(i);
-
-            Integer[] tmpNumbers = list.toArray(new Integer[0]);
-            list.remove(i);
-
-            result.add(str);
-            permutation(count, tmpNumbers, tmpStr);
+    private static void makeCombination(int r,int[] arr, int[] temp, int current, int start) {
+        if (r == current) {
+            System.out.println(Arrays.toString(temp));
+        } else {
+            for (int i = start; i < arr.length; i++) {
+                temp[current] = arr[i];
+                makeCombination(r, arr, temp, current + 1, i + 1);
+            }
         }
-
-        for(String st : result) {
-            Common.println("st", st);
-        }
+        Common.println("temp", temp);
     }
 
     public static void combination() {
@@ -32,9 +23,9 @@ public class PermuCombi {
     }
 
     public static void main(String args[]) {
-        Integer[] numbers = {3, 2, 1, 5};
+        int[] arr = { 1, 2, 3, 4, 5 };
 
-        permutation(2, numbers, "");
+        makeCombination(2, arr, new int[1], 0, 0);
     }
 
 }
